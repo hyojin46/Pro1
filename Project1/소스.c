@@ -6,6 +6,7 @@ typedef int HNode;
 #define Key(n)	(n)
 
 HNode heap[MAX_HEAP_NODE];
+HNode down_heap[];
 int heap_size;
 
 #define Parent(i) (heap[i / 2]) // i의 부모 노드
@@ -52,37 +53,36 @@ HNode delete_heap() // 힙트리의 삭제함수
 
 	}
 	heap[parent] = last; // 마지막 노드를 최종위치(루트)에 저장
+
+	int down_heap[] ={};
+	for (int i = 0; i <= hroot; i++) {
+		down_heap[i] += hroot;
+	}
+
 	return hroot; // 삭제할 루트를 반환
 }
 
 void print_heap() // 힙을 레벨단위로 출력함
 {
 	int i, level;
-	for (i = 1, level = 1; i <= heap_size; i++) {
-		if (i = level) {
+	printf("%2d ", Key(heap[1]));
+	for (i = 2, level = 2; i <= heap_size; i++) {
+		if (i == level) {
 			printf("\n");
-			level *= 2;
+			level *=2;
 		}
 		printf("%2d ", Key(heap[i]));
 	}
 	printf("\n-----------------");
 }
 
-//void Down_heap(int r) 
-//{
-//	int down_heap[] = "";
-//	for (int i = 0; i <= r; i++) {
-//		down_heap[i] += r;
-//	}
-//}
-//void print_down_heap() 
-//{
-//	int down_heap[] = ;
-//	for (int i = 0; i <= heap_size; i++) {
-//		printf("{0} ", down_heap[i]);
-//	}
-//	printf("\n");
-//}
+void print_down_heap() 
+{
+	for (int i = 0; i <= heap_size; i++) {
+		printf("{0} ", down_heap[i]);
+	}
+	printf("\n");
+}
 
 void main()
 {
@@ -107,6 +107,7 @@ void main()
 	delete_heap();
 	delete_heap();
 	delete_heap();
+	print_down_heap();
 	printf("\n");
 	
 }
